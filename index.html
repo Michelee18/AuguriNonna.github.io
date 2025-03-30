@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auguri Valeria</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Dancing+Script:wght@700&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+        }
+        
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            color: #ff6b6b;
+            text-shadow: 3px 3px 0px rgba(255,107,107,0.2);
+            margin-bottom: 2rem;
+            animation: fadeIn 2s ease-in-out;
+        }
+        
+        .image-container {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 8px solid white;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            transition: transform 0.5s ease;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .image-container:hover {
+            transform: scale(1.05);
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .hearts {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: float 4s ease-in-out infinite;
+            opacity: 0.7;
+        }
+        
+        .heart1 { top: 10%; left: 10%; color: #ff6b6b; animation-delay: 0s; }
+        .heart2 { top: 20%; right: 15%; color: #ffb347; animation-delay: 1s; }
+        .heart3 { bottom: 15%; left: 20%; color: #ff6b6b; animation-delay: 2s; }
+        .heart4 { bottom: 25%; right: 10%; color: #ffb347; animation-delay: 3s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Auguri Valeria!</h1>
+        <div class="image-container">
+            <!-- Sostituisci con il percorso della tua immagine -->
+            <img src="nonni 1.jpg" alt="Valeria">
+        </div>
+    </div>
+    
+    <div class="hearts heart1">❤</div>
+    <div class="hearts heart2">❤</div>
+    <div class="hearts heart3">❤</div>
+    <div class="hearts heart4">❤</div>
+    
+    <script>
+        // Creazione dei confetti
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#ffb347', '#47b8ff', '#c56cf0', '#7dff47'];
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = -10 + 'px';
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                document.body.appendChild(confetti);
+                
+                const animationDuration = Math.random() * 3 + 2 + 's';
+                const animationDelay = Math.random() * 5 + 's';
+                
+                confetti.style.animation = `fall ${animationDuration} ${animationDelay} linear forwards`;
+                
+                // Rimuovi i confetti dopo l'animazione
+                setTimeout(() => {
+                    confetti.remove();
+                }, (parseFloat(animationDuration) + parseFloat(animationDelay)) * 1000);
+            }
+        }
+        
+        // Aggiungi l'animazione dei confetti
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fall {
+                0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+                100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Attiva i confetti al caricamento della pagina e poi ogni 3 secondi
+        window.onload = function() {
+            createConfetti();
+            setInterval(createConfetti, 3000);
+        };
+    </script>
+</body>
+</html>
